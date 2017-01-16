@@ -8,7 +8,19 @@
   <body ng-app='app'>
     <div ng-controller='PostsCtrl' class="container">
       <h1>Recent Posts</h1>
+      <form role='form'>
+        <div class='form-group'>
+          <div class="input-group">
+            <!--ng-model 지시자는 input element를 $scope에 연결-->
+            <input ng-model='postBody' class='form-control' />
+            <span class='input-group-btn'>
+              <!-- addPost 함수를 호출하여 $scope에 이벤트 실행 -->
+              <button ng-click='addPost()' class='btn btn-defalut'>Add Post</button>
+            </span>
+          </div>
+        </div>
       <ul class='list-group'>
+        <!-- ng-repeat 지시자는 $scope의 배열을 반복해서 불러옴 -->
         <li ng-repeat='post in posts' class='list-group-item'>
           <strong>@{{post.username}}</strong>
           <span>{{post.body}}</span>
@@ -22,6 +34,19 @@
       var app=angular.module('app',[])
       //컨트롤러의 인스턴스를 만들기 위해 사용될 함수
       app.controller('PostsCtrl',function($scope){
+        $scope.addPost=function(){
+          //input할 내용이 있다면
+          if($scope.postBody){
+            //unshiftsms posts배열의 맨 앞에 data를 추가함
+            $scope.posts.unshift({
+              username:'dickeyxxx',
+              body:$scope.postBody
+            })
+            //inputbox 초기화
+            $scope.postBody=null
+          }
+        }
+        // $scope 명의 배열 선언
         $scope.posts=[
           {
             username:'dickeyxxx',
