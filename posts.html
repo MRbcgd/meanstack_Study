@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!--bootstrap-->
+    <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+  </head>
+  <!--body element를 angularjs 앱으로 선언 -->
+  <body ng-app='app'>
+    <div ng-controller='PostsCtrl' class="container">
+      <h1>Recent Posts</h1>
+      <ul class='list-group'>
+        <li ng-repeat='post in posts' class='list-group-item'>
+          <strong>@{{post.username}}</strong>
+          <span>{{post.body}}</span>
+        </li>
+      </ul>
+    </div>
+    <!-- angularjs 호출 -->
+    <script src='https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular.min.js'></script>
+    <script>
+    //첫번째 인수는 모듈 이름, 두번째 인수 배열은 이 모듈에 의존하는 모듈의 배열
+      var app=angular.module('app',[])
+      //컨트롤러의 인스턴스를 만들기 위해 사용될 함수
+      app.controller('PostsCtrl',function($scope){
+        $scope.posts=[
+          {
+            username:'dickeyxxx',
+            body:'Node rules!'
+          },
+          {
+            username:'jeffdickey',
+            body:'trying out angular.js...'
+          }
+        ]
+      })
+    </script>
+  </body>
+</html>
